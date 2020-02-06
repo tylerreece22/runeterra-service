@@ -1,0 +1,23 @@
+# This file configures the hello-world app which serves public web traffic.
+apiVersion: extensions/v1beta1 
+kind: Deployment
+metadata:
+  name: runeterra-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: runeterra
+  template:
+    metadata:
+      labels:
+        app: runeterra
+    spec:
+      containers:
+      - name: runeterra-service
+        image: gcr.io/runeterra-267409/runeterra-service:latest
+        ports:
+        - containerPort: 8080
+        env:
+          - name: PORT
+            value: "8080"

@@ -1,0 +1,15 @@
+{
+  "name": "runeterra-service",
+  "description": "Service to handle runeterra workload",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": "https://github.com/tylerreece22/runeterra-service.git",
+  "author": "Tyler Reece <tyler_reece@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
