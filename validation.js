@@ -9,5 +9,5 @@ module.exports.deckEncodeValidation = Joi.object({
 })
 
 module.exports.cardDetailsValidation = Joi.object({
-    cardCode: Joi.string().length(7).required()
+    cardCode: Joi.string().length(7)
 })

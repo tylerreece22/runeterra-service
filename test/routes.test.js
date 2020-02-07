@@ -1,6 +1,7 @@
 const should = require('should')
 const request = require('supertest')
 const expectedCard = require('./resource/expectedCard')
+const cards = require('../set1-en_us')
 
 describe('routes', () => {
     process.env.PORT = 3333
@@ -113,11 +114,11 @@ describe('routes', () => {
                 should(result.body).deepEqual(expectedCard);
             })
 
-            it('should send 400 with message if cardCode is not in params', async () => {
+            it('should send 200 and all cards if cardCode is not in params', async () => {
                 const result = await request(server).get('/card/details')
 
-                should(result.status).eql(400)
-                should(result.text).eql('"cardCode" is required')
+                should(result.status).eql(200)
+                should(result.body).deepEqual(cards)
             });
 
             it('should send 404 with message if cardCode is not a real card', async () => {

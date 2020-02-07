@@ -104,7 +104,6 @@ paths:
         - in: query
           schema:
             type: string
-            required: true
           name: cardCode
           value: 01PZ019
           description: Each card has a code created from the cards details https://github.com/RiotGames/LoRDeckCodes/#cards--decks

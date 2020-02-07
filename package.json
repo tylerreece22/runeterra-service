@@ -1,6 +1,6 @@
 {
   "name": "runeterra-service",
-  "description": "Service to handle runeterra workload",
+  "description": "Service to handle Runeterra workload",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
