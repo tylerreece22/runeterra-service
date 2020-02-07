@@ -1,14 +1,26 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+const deck = require('./routes/deck')
+const card = require('./routes/card')
+const log = require('./logger')
+const swaggerUi = require('swagger-ui-express');
+const {options, swaggerDocument} = require('./swagger')
 
-app.get('/', (req, res) => {
-  console.log('Hello world received a request.');
+app.use(express.json());
+const corsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  optionsSuccessStatus: 200
+}
 
-  const target = process.env.TARGET || 'Runeterra';
-  res.send(`Hello ${target}!`);
-});
+app.use(cors(corsOptions))
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+app.use('/deck', deck);
+app.use('/card', card);
 
 const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log('Hello world listening on port', port);
+
+module.exports = app.listen(port, () => {
+    log.info(`Listening on ${port}`)
 });

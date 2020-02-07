@@ -1,0 +1,119 @@
+swagger: "2.0"
+info:
+  title: Runeterra Service
+  description: Service used to handle all card details and deck encoding and decoding
+  version: 1.0.0
+tags:
+  - name: Deck
+    description: Deck encoding and decoding
+  - name: Card
+    description: Card details
+paths:
+  /deck/decode:
+    get:
+      summary: Decodes deckCode and returns deck object
+      description: Decodes deckCode and returns deck object
+      tags:
+        - Deck
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          schema:
+            type: string
+            required: true
+          name: deckCode
+          value: CEAAECABAQJRWHBIFU2DOOYIAEBAMCIMCINCILJZAICACBANE4VCYBABAILR2HRL
+          description: Riot creates a deckCode based on the contents on the deck https://github.com/RiotGames/LoRDeckCodes/#cards--decks
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Malformed request
+        '404':
+          description: Not found
+        '500':
+          description: Something happened from Amazon I was not expecting or something failed in my service
+  /deck/encode:
+    post:
+      summary: Accepts deck object and translates into deckCode
+      description: Accepts deck object and translates into deckCode
+      tags:
+        - Deck
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: deck
+          schema:
+            type: object
+            properties:
+              deck:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - code
+                    - count
+                    - set
+                    - id
+                    - faction
+                  properties:
+                    code:
+                      type: string
+                      example: 01PZ019
+                    count:
+                      type: integer
+                      example: 2
+                    set:
+                      type: integer
+                      example: 1
+                    id:
+                      type: integer
+                      example: 19
+                    faction:
+                      type: object
+                      required:
+                        - id
+                        - shortCode
+                      properties:
+                        id:
+                          type: integer
+                          example: 4
+                        shortCode:
+                          type: string
+                          example: PZ
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Malformed request
+        '404':
+          description: Not found
+        '500':
+          description: Something happened from Amazon I was not expecting or something failed in my service
+  /card/details:
+    get:
+      summary: Gets card details for given cardCode
+      description: Gets card details for given cardCode
+      tags:
+        - Card
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          schema:
+            type: string
+            required: true
+          name: cardCode
+          value: 01PZ019
+          description: Each card has a code created from the cards details https://github.com/RiotGames/LoRDeckCodes/#cards--decks
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Malformed request
+        '404':
+          description: Not found
+        '500':
+          description: Something happened from Amazon I was not expecting or something failed in my service

@@ -4,12 +4,24 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "./node_modules/.bin/mocha --exit"
   },
   "repository": "https://github.com/tylerreece22/runeterra-service.git",
   "author": "Tyler Reece <tyler_reece@outlook.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1"
+    "@hapi/joi": "^17.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "runeterra": "0.0.7",
+    "swagger-ui-express": "^4.1.3",
+    "winston": "^3.2.1",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "mocha": "^7.0.1",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2"
   }
 }
