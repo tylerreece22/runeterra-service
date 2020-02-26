@@ -14,10 +14,18 @@ const corsOptions = {
   optionsSuccessStatus: 200
 }
 
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 30 // limit each IP to 100 requests per windowMs
+});
+
+//  apply to all requests
+app.use(limiter);
+
 app.use(cors(corsOptions))
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 app.use('/deck', deck);
-app.use('/card', card);
+// app.use('/card', card);
 
 const port = process.env.PORT || 8080;
 
