@@ -6,6 +6,7 @@ const card = require('./routes/card')
 const log = require('./logger')
 const swaggerUi = require('swagger-ui-express');
 const {options, swaggerDocument} = require('./swagger')
+const rateLimit = require("express-rate-limit");
 
 app.use(express.json());
 const corsOptions = {
